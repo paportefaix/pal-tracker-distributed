@@ -47,3 +47,26 @@ curl -k "https://login.sys.evans.pal.pivotal.io/oauth/token" -i -u "14625a55-ef1
     -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
     -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io \
     -PtimesheetsServerUrl=https://timesheets-pal-dio-pa.apps.evans.pal.pivotal.io
+
+curl 'https://login.sys.evans.pal.pivotal.io/oauth/token' -i -u 'tracker-client:supersecret' -X POST -H 'Accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&response_type=token&token_format=opaque'
+
+cf env tracker-APP
+ "auth_domain": "https://login.sys.evans.pal.pivotal.io",
+     "client_id": "fde5022b-ef01-44f6-aa2a-07ab1ebfc2d3",
+     "client_secret": "bbf3311e-2a53-418e-9c26-628df090ea67"
+
+curl -k "https://login.sys.evans.pal.pivotal.io/oauth/token" -i -u "fde5022b-ef01-44f6-aa2a-07ab1ebfc2d3:bbf3311e-2a53-418e-9c26-628df090ea67" -X POST -H 'Accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&response_type=token'
+
+
+{"access_token":"eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vdWFhLnN5cy5ldmFucy5wYWwucGl2b3RhbC5pby90b2tlbl9rZXlzIiwia2lkIjoia2V5LTEiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiIwNDkwZDUzNmM3ODY0ZDc1OWIxYzAwNjQzMTIzZjY3NyIsInN1YiI6ImZkZTUwMjJiLWVmMDEtNDRmNi1hYTJhLTA3YWIxZWJmYzJkMyIsImF1dGhvcml0aWVzIjpbInVhYS5yZXNvdXJjZSJdLCJzY29wZSI6WyJ1YWEucmVzb3VyY2UiXSwiY2xpZW50X2lkIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiY2lkIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiYXpwIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInJldl9zaWciOiIyZGRkMjQ0NSIsImlhdCI6MTU2ODI5MTIzNywiZXhwIjoxNTY4MzM0NDM3LCJpc3MiOiJodHRwczovL3VhYS5zeXMuZXZhbnMucGFsLnBpdm90YWwuaW8vb2F1dGgvdG9rZW4iLCJ6aWQiOiJ1YWEiLCJhdWQiOlsidWFhIiwiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIl19.A6Fj0n00HVDBwdTlmnhQN2iHKTf1cIT88J2tnHAbLV0cdWs-mt7rQlQtrXIR3WAqV0QmjbWbN9RxKyDcjveNLY9iAKLRzizGNRygz4DoZce3P86FtmkxiBaHJBdrrX2AthCYH1ts6POSpmy3F5kzeL6BbOP502vnLZdRANsniUmIzI2lCPg_31DqvaQuqhp_YkobALcX9sw5aQk4lQBDKH9aMPgZNvuIZyEISOlJLPzZyUegOtC2sHAnotZNSoQD8oCiUq0JWE1nrJVGFgXvXB5xbexx7VbzRgIDWX6wlBPlbOcMu66dFCoe2IWqw20W4Bvsc8gMjy_LTMfUMU1W0w","token_type":"bearer","expires_in":43199,"scope":"uaa.resource","jti":"0490d536c7864d759b1c00643123f677"}
+
+curl https://registration-pal-dio-pa.apps.evans.pal.pivotal.io -H"Authorization: Bearer eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vdWFhLnN5cy5ldmFucy5wYWwucGl2b3RhbC5pby90b2tlbl9rZXlzIiwia2lkIjoia2V5LTEiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiIwNDkwZDUzNmM3ODY0ZDc1OWIxYzAwNjQzMTIzZjY3NyIsInN1YiI6ImZkZTUwMjJiLWVmMDEtNDRmNi1hYTJhLTA3YWIxZWJmYzJkMyIsImF1dGhvcml0aWVzIjpbInVhYS5yZXNvdXJjZSJdLCJzY29wZSI6WyJ1YWEucmVzb3VyY2UiXSwiY2xpZW50X2lkIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiY2lkIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiYXpwIjoiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInJldl9zaWciOiIyZGRkMjQ0NSIsImlhdCI6MTU2ODI5MTIzNywiZXhwIjoxNTY4MzM0NDM3LCJpc3MiOiJodHRwczovL3VhYS5zeXMuZXZhbnMucGFsLnBpdm90YWwuaW8vb2F1dGgvdG9rZW4iLCJ6aWQiOiJ1YWEiLCJhdWQiOlsidWFhIiwiZmRlNTAyMmItZWYwMS00NGY2LWFhMmEtMDdhYjFlYmZjMmQzIl19.A6Fj0n00HVDBwdTlmnhQN2iHKTf1cIT88J2tnHAbLV0cdWs-mt7rQlQtrXIR3WAqV0QmjbWbN9RxKyDcjveNLY9iAKLRzizGNRygz4DoZce3P86FtmkxiBaHJBdrrX2AthCYH1ts6POSpmy3F5kzeL6BbOP502vnLZdRANsniUmIzI2lCPg_31DqvaQuqhp_YkobALcX9sw5aQk4lQBDKH9aMPgZNvuIZyEISOlJLPzZyUegOtC2sHAnotZNSoQD8oCiUq0JWE1nrJVGFgXvXB5xbexx7VbzRgIDWX6wlBPlbOcMu66dFCoe2IWqw20W4Bvsc8gMjy_LTMfUMU1W0w"
+
+./gradlew cloudNativeDeveloperDistributedSystemWithConfigServer \
+    -PuaaUrl=https://login.sys.evans.pal.pivotal.io \
+    -PclientId=fde5022b-ef01-44f6-aa2a-07ab1ebfc2d3 \
+    -PclientSecret=bbf3311e-2a53-418e-9c26-628df090ea67 \
+    -PregistrationServerUrl=https://registration-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PtimesheetsServerUrl=https://timesheets-pal-dio-pa.apps.evans.pal.pivotal.io
