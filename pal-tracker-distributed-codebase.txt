@@ -1,6 +1,6 @@
 pal-tracker-distributed codebase
 
-./gradlew cloudNativeDeveloperDistributedSystemDeployment \
+./gradlew cloudNativeDeveloperDistributedSystemWithCircuitBreaker \
     -PregistrationServerUrl=https://registration-pal-dio-pa.apps.evans.pal.pivotal.io \
     -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
     -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io \
@@ -19,8 +19,11 @@ curl -i -XPOST -H"Content-Type: application/json" https://allocations-pal-dio-pa
 curl -i https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations?projectId=${PROJECT_ID}
 
 
-./gradlew cloudNativeDeveloperDistributedSystemWithServiceDiscovery \
-    -PregistrationServerUrl=https://registration-pal-dio-pa.apps.evans.pal.pivotal.io \
-    -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
-    -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/ \
-    -PtimesheetsServerUrl=https://timesheets-pal-dio-pa.apps.evans.pal.pivotal.io/
+curl -i -XPOST -H"Content-Type: application/json" http://registration-pal-dio-pa.apps.evans.pal.pivotal.io/registration -d'{"name": "Dio"}'
+curl -i http://registration-pal-dio-pa.apps.evans.pal.pivotal.io/accounts?ownerId=7
+curl -i -XPOST -H"Content-Type: application/json" http://registration-pal-dio-pa.apps.evans.pal.pivotal.io/projects -d"{\"name\": \"Project A\", \"accountId\": \"6\"}"
+curl -i -XPOST -H"Content-Type: application/json" http://registration-pal-dio-pa.apps.evans.pal.pivotal.io/projects -d"{\"name\": \"Project B\", \"accountId\": \"6\"}"
+curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations/ -d"{\"projectId\": \"4\", \"userId\": \"7\", \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
+curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations/ -d"{\"projectId\": \"5\", \"userId\": \"7\", \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
+curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations/ -d"{\"projectId\": \"4\", \"userId\": \"7\", \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
+
