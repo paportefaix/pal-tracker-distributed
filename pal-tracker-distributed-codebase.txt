@@ -17,3 +17,10 @@ curl -i localhost:8083/projects?accountId=${ACCOUNT_ID}
 
 curl -i -XPOST -H"Content-Type: application/json" https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations -d"{\"projectId\": 1, \"userId\": 4, \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
 curl -i https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations?projectId=${PROJECT_ID}
+
+
+./gradlew cloudNativeDeveloperDistributedSystemWithServiceDiscovery \
+    -PregistrationServerUrl=https://registration-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/ \
+    -PtimesheetsServerUrl=https://timesheets-pal-dio-pa.apps.evans.pal.pivotal.io/
