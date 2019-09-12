@@ -27,3 +27,23 @@ curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.
 curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations/ -d"{\"projectId\": \"5\", \"userId\": \"7\", \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
 curl -i -XPOST -H"Content-Type: application/json" http://allocations-pal-dio-pa.apps.evans.pal.pivotal.io/allocations/ -d"{\"projectId\": \"4\", \"userId\": \"7\", \"firstDay\": \"2015-05-17\", \"lastDay\": \"2015-05-18\"}"
 
+"credentials": {
+     "auth_domain": "https://login.sys.evans.pal.pivotal.io",
+     "client_id": "14625a55-ef1f-4f00-b179-40095df4e7be",
+     "client_secret": "1c36c1c6-8b61-4abc-8137-86bdea669272"
+    },
+
+curl -k "https://login.sys.evans.pal.pivotal.io/oauth/token" -i -u "14625a55-ef1f-4f00-b179-40095df4e7be:1c36c1c6-8b61-4abc-8137-86bdea669272" -X POST -H 'Accept: application/json' -H 'Content-Type: application/x-www-form-urlencoded' -d 'grant_type=client_credentials&response_type=token'
+
+
+{"access_token":"eyJhbGciOiJSUzI1NiIsImprdSI6Imh0dHBzOi8vdWFhLnN5cy5ldmFucy5wYWwucGl2b3RhbC5pby90b2tlbl9rZXlzIiwia2lkIjoia2V5LTEiLCJ0eXAiOiJKV1QifQ.eyJqdGkiOiIzOGQ4OTVlY2U3MDI0MmFmYTI2YzUzZWE0Mzk4MDAxYyIsInN1YiI6IjE0NjI1YTU1LWVmMWYtNGYwMC1iMTc5LTQwMDk1ZGY0ZTdiZSIsImF1dGhvcml0aWVzIjpbInVhYS5yZXNvdXJjZSJdLCJzY29wZSI6WyJ1YWEucmVzb3VyY2UiXSwiY2xpZW50X2lkIjoiMTQ2MjVhNTUtZWYxZi00ZjAwLWIxNzktNDAwOTVkZjRlN2JlIiwiY2lkIjoiMTQ2MjVhNTUtZWYxZi00ZjAwLWIxNzktNDAwOTVkZjRlN2JlIiwiYXpwIjoiMTQ2MjVhNTUtZWYxZi00ZjAwLWIxNzktNDAwOTVkZjRlN2JlIiwiZ3JhbnRfdHlwZSI6ImNsaWVudF9jcmVkZW50aWFscyIsInJldl9zaWciOiIxZmYyZjU5ZSIsImlhdCI6MTU2ODI4MDk0OCwiZXhwIjoxNTY4MzI0MTQ4LCJpc3MiOiJodHRwczovL3VhYS5zeXMuZXZhbnMucGFsLnBpdm90YWwuaW8vb2F1dGgvdG9rZW4iLCJ6aWQiOiJ1YWEiLCJhdWQiOlsidWFhIiwiMTQ2MjVhNTUtZWYxZi00ZjAwLWIxNzktNDAwOTVkZjRlN2JlIl19.rfaZONoUDelEBfLyBSbUiXUzpcY8kzW7UzvhkJu6VTBjtRaBjH9WeRTtlN6DWJqeBfPKvSKI-LEu2S2u6bqI0BnHY79hT5Zn-2MXosZCNN9ZcWJTnokJkfm9MtFTJNkH5KTjf0ojsxdPqehSse4W-6GovuQBY5AENdZ6lRIeSxzN7qz_SbMf92f3zIca6uxm4Tc8CdCl-HAC-QA1IDF995vZAehtAoptkGoOuJcuNv5PkmrXg1IyFR836vd2bygZukNkTtpu-XSMqWSn2mz5D5XmO0qAsC_z1Xxsh5giBsw1sE7w7HM3DmUo5spCCKJhxaHbns3R4Fb9wLfR3HGQZQ","token_type":"bearer","expires_in":43199,"scope":"uaa.resource","jti":"38d895ece70242afa26c53ea4398001c"}
+
+
+./gradlew cloudNativeDeveloperDistributedSystemWithSecurity \
+    -PuaaUrl=https://login.sys.evans.pal.pivotal.io \
+    -PclientId=14625a55-ef1f-4f00-b179-40095df4e7be \
+    -PclientSecret=1c36c1c6-8b61-4abc-8137-86bdea669272 \
+    -PregistrationServerUrl=https://registration-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PbacklogServerUrl=https://backlog-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PallocationsServerUrl=https://allocations-pal-dio-pa.apps.evans.pal.pivotal.io \
+    -PtimesheetsServerUrl=https://timesheets-pal-dio-pa.apps.evans.pal.pivotal.io
